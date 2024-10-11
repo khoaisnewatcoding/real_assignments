@@ -26,3 +26,7 @@ Break down:
 -"return 0": Basically, this means that the program executed sucessfully and the "0" means that there is no error.
 -";": means that the code line is finished and ready to move onto the next line.
 - "\n": removing the special characters or anything that may occur when the program runs.
+# real_assignments
+# real_assignments
+# real_assignments
+# real_assignments
