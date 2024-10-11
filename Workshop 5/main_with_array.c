@@ -12,12 +12,12 @@ int main(){
 
 
     // Input phase
-    do{
+    do { 
         printf("Please enter the number of students (Max %d): ", MAX_STUDENTS);
         scanf("%d", &num_students);
     } while (num_students < 1 || num_students > MAX_STUDENTS); // If user enters the number within this range, it will loop the code asking the same thing
 
-    do{
+    do {
         printf("Please enter the number of grades per student (Max %d): ", MAX_GRADES_PER_STUDENT);
         scanf("%d", &num_grades_per_student); // Corrected: takes input for num_grades_per_student
     } while (num_grades_per_student < 1 || num_grades_per_student > MAX_GRADES_PER_STUDENT); // Similar to above, except it's grades
