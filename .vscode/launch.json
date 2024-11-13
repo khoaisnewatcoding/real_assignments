@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/khoan/Assignments",
-      "program": "c:/Users/khoan/Assignments/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/khoa/Assignments/Workshop 7",
+      "program": "/home/khoa/Assignments/Workshop 7/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
