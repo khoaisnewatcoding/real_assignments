@@ -8,12 +8,12 @@
 */
 // Part 1 
 float calc_emission_transport() {
-    char transportation[20];
+    char transportation[100];
     float emission_factor;
     float emissions;
 
-    printf("What method of transportation do you use?(Capital first letter) ");
-    scanf("%3s", transportation);
+    printf("What method of transportation do you use?(E.g Gasoline, Electric, Hybrid) ");
+    scanf(" %[^\n]", transportation);
 
     if ((transportation[0] == 'G' || transportation[0] == 'g') && transportation[1] == 'a' && transportation[2] == 's') {
         emission_factor = 0.404;
