@@ -19,6 +19,9 @@ void printStudentInfo(struct Student* students){
 // hardest part
 
 // read a string and parse it to multiple students
+
+
+/*
 int parseStudent(char *line, struct Student* students) {
     char *token;
     int grade_index = 0;
@@ -48,4 +51,30 @@ int parseStudent(char *line, struct Student* students) {
     students->grade_count = grade_index;
     return grade_index > 0;
 
+}
+*/
+
+int parseStudent(char *line, struct Student *students) {
+    char *token;
+    int grade_index = 0;
+
+    // Get the ID
+    token = strtok(line, " ");
+    if (token == NULL) {
+        return 0; // Terminate if the string is empty
+    }
+    students->id = atoi(token); // Convert the string to an integer
+
+    // Get the grades
+    while ((token = strtok(NULL, " ")) != NULL) {
+        if (grade_index >= 4) {
+            break; // Ignore extra grades
+        }
+        students->grades[grade_index++] = atof(token); // Convert to float
+    }
+
+    students->grade_count = grade_index;
+
+    // Return success if at least one grade was parsed
+    return grade_index > 0;
 }

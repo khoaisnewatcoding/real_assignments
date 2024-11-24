@@ -24,16 +24,18 @@ v. Salary (float)
 //this struct holds the employee values
 struct Employee {
     int id //employee id
-    char name[MAX_NAME] //employee name
-    char gender[5] //employee gender
-    char ethnicity[20] //employee ethnicity
-    float salary //employee salary
+    char name[MAX_NAME]; //employee name
+    char gender[5]; //employee gender
+    char ethnicity[20]; //employee ethnicity
+    float salary; //employee salary
 };
 
 //this struct holds the average company values
 struct AverageValues{
-    
-
+    char group[20]; //an array with a combination of the employee gender and ethnicity seperated by a comma
+    int numEmps;
+    float totalGroupSalary;
+    float averageSalary;
 };
 
 
@@ -43,7 +45,7 @@ void inputEmployeeData(Employee* employee); // Khoa is going to work on this
 
 float calculateAverageSalary(Employee* employee[], int numEmployees, AverageValues* values, int *numGroups ); //emir
 
-void 
+void compareAndFilterEmployeesByGender( Employee* employee[], int numEmployees,int *genderFilter, int *numFilteredEmployees); //Faiz
 
 
 #endif

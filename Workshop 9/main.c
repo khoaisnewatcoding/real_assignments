@@ -71,10 +71,17 @@ int main() {
       if (len > 0 && line[len-1] == '\n') {
          line[len-1] = '\0'; // Replace the last character as a new line character into a string terminator
       }
+      if (parseStudent(line, &students[student_count])){
+         student_count++;
+         if (student_count >= 100){ //prevent
+            printf("Maximum student count reached!!!!!!\n");
+            break;
+         }
+      } else{
+         printf("Invalid input, skipping line.\n");
+      }
    }     
-   if (parseStudent(line, &students[student_count])){
-      student_count++;
-   }
+   
 
 
    //Printing student's records
