@@ -1,9 +1,6 @@
-#include "Employee.c"
-// NO PAIN NO GAIN!!!
-// NO CAP ONLY FAX
+#include "Employee.h"
 
-
-void inputEmployeeData(Employee* employee){ // Khoa's
+void inputEmployeeData(struct Employee* employee){ // Khoa's
     // What if the user input is literally BS and doesnt even relate?
     // Then we have to loop until its valid!
 
@@ -18,12 +15,12 @@ void inputEmployeeData(Employee* employee){ // Khoa's
     scanf("%s", employee->name);
     //Get gender
     do{
-        printf("Gender (male/female/non-binary): ");
-        scanf("%s", employee->gender);
-    } while (strcmp(employee->gender, "male") != 0 && strcmp(employee->gender, "female") != 0 && strcmp(employee->gender, "non-binary") != 0);
+        printf("Gender (male/female/nonbinary): ");
+        scanf("%s", employee->gender);  // Ensure this only captures gender correctly
+    } while (strcmp(employee->gender, "male") != 0 && strcmp(employee->gender, "female") != 0 && strcmp(employee->gender, "nonbinary") != 0);
     
     //Get ethnicity
-    char userinput[10];
+    char userinput[20];
     do {
         printf("Employee's ethnicity (BIPOC, non-BIPOC) / Enter ? for more information: ");
         scanf("%s", userinput);
@@ -61,7 +58,7 @@ void inputEmployeeData(Employee* employee){ // Khoa's
     // Must be greater than 0
     do{
         printf("Employee's Salary:");
-        scanf("%d", employee->salary);
+        scanf("%d", &employee->salary);
     } while (employee->salary <= 0);
 }
 
@@ -111,64 +108,63 @@ save it under the companyAverage struct averageSalary.
 */
 
 // Emir's 
-float calculateAverageSalary(Employee* filteredGroup[], int numFilteredEmp){
+float calculateAverageSalary(struct Employee* filteredGroup[], int numFilteredEmp){
     if (numFilteredEmp == 0){
         return 0; //Imagine the company has no other gender, gotta avoid devising by 0 :)
     }
 
     int totalSalary = 0;
     for (int i = 0; i < numFilteredEmp; i++){
-        totalsalary =+ filteredGroup[i]->salary;
+        totalSalary += filteredGroup[i]->salary;
     }
-    return (totalsalary / numFilteredEmp);
+    return ((float)totalSalary / numFilteredEmp);
 }
 
 
 
-// Faizan:
+// Faiz:
+// Faiz youre doing comparison
 //compare data by iterating through employee's database and then filter by criteria
-void compareEmployeebyGender(Employee* employees[], int numEmployees, Employee* filteredEmployeesMale[], Employee* filteredEmployeesFemale[], Employee* filteredEmployeesNonBinary[], int* numFilteredMaleEmployees, int* numFilteredFemaleEmployees, int* numFilteredNonBinaryEmployees){
+// i think you can use for loop for this
+
+// Filter the employee database and filter by gender and then calculate average using the function and displays the result
+void compareEmployeebyGender(struct Employee* employees[], int numEmployees, struct Employee* filteredEmployeesMale[], struct Employee* filteredEmployeesFemale[], struct Employee* filteredEmployeesNonBinary[], int* numFilteredMaleEmployees, int* numFilteredFemaleEmployees, int* numFilteredNonBinaryEmployees) {
     //step 1: Iterating through the employees array
     //step 2: compare "gender" and filter it out
     // step 3: display employees average salary by category Male, Female, non-binary
-    // We will intialize the number of filtered employees to 0:
+    // We will initialize the number of filtered employees to 0:
 
     // step1 and 2: Iterating through the employees database to filter for each gender group
     *numFilteredMaleEmployees = 0;
     *numFilteredFemaleEmployees = 0;
     *numFilteredNonBinaryEmployees = 0;
 
-
-    for(int i = 0; i < numEmployees; i++){ // Iterate through all employees in the database and filter for each gender group:
-        if (strcmp(employees[i]->gender, "male") == 0 ){
-            // transfer the data of filtered employees into a new database for "Male" group
+    for(int i = 0; i < numEmployees; i++){
+        if (strcmp(employees[i]->gender, "male") == 0){
             filteredEmployeesMale[*numFilteredMaleEmployees] = employees[i];
-            (*numFilteredMaleEmployees)++; // Make sure the new filtered emp go to the next space in the group
-            //If the employee's gender is "female", add them to the filteredFemaleEmployees array
-        } elif (strcmp(employees[i]->gender, "female") == 0 ){ 
-            filteredEmployeesFemale[*numFilteredFemaleEmployees] = employees[i]; 
+            (*numFilteredMaleEmployees)++;
+        } else if (strcmp(employees[i]->gender, "female") == 0){
+            filteredEmployeesFemale[*numFilteredFemaleEmployees] = employees[i];
             (*numFilteredFemaleEmployees)++;
-            //If the employee's gender is "non-binary", add them to the filteredNonBinaryEmployees array
-        else if (strcmp(employees[i]->gender, "non-binary") == 0 ){
-        } elif (strcmp(employees[i]->gender, "non-binary") == 0 ){
+        } else if (strcmp(employees[i]->gender, "nonbinary") == 0){
             filteredEmployeesNonBinary[*numFilteredNonBinaryEmployees] = employees[i];
             (*numFilteredNonBinaryEmployees)++;
         }
     }
 
-    // Step 3:Calculate and display the average salary for each gender group
-
+    // Step 3: Calculate average salary for each gender group
     float avgMaleEmps = calculateAverageSalary(filteredEmployeesMale, *numFilteredMaleEmployees);
     float avgFemaleEmps = calculateAverageSalary(filteredEmployeesFemale, *numFilteredFemaleEmployees);
     float avgNonbinaryEmps = calculateAverageSalary(filteredEmployeesNonBinary, *numFilteredNonBinaryEmployees);
-    // Display the results:
+
     printf("Average Male Salary: %.2f\n", avgMaleEmps);
     printf("Average Female Salary: %.2f\n", avgFemaleEmps);
     printf("Average Non-Binary Salary: %.2f\n", avgNonbinaryEmps);
-
 }
 
-void compareEmployeebyEthnicity(Employee* employees[], int numEmployees, Employee* filteredBIPOCemp[], Employee* filterednonBIPOCemp[], int* numBIPOCemp, int* numnonBIPOCemp){
+// Khoa and faiz both worked on this
+// this function filters the employee by ethnicity and implement the calculate average function to do the job and finally display the result
+void compareEmployeebyEthnicity(struct Employee* employees[], int numEmployees, struct Employee* filteredBIPOCemp[], struct Employee* filterednonBIPOCemp[], int* numBIPOCemp, int* numnonBIPOCemp){
     // Follow the same step as the previous function
 
     *numBIPOCemp = 0;
@@ -178,19 +174,17 @@ void compareEmployeebyEthnicity(Employee* employees[], int numEmployees, Employe
         if(strcmp(employees[i]->ethnicity, "BIPOC") == 0){
             filteredBIPOCemp[*numBIPOCemp] = employees[i];
             (*numBIPOCemp)++;
-        } elif (strcmp(employees[i]->ethnicity, "non-BIPOC") == 0){
+        } else if (strcmp(employees[i]->ethnicity, "non-BIPOC") == 0){
             filterednonBIPOCemp[*numnonBIPOCemp] = employees[i];
             (*numnonBIPOCemp)++;
         }
     }
 
+    // Calculate average salary for BIPOC and non-BIPOC groups
     float avgBIPOCemps = calculateAverageSalary(filteredBIPOCemp, *numBIPOCemp);
     float avgnonBIPOCemps = calculateAverageSalary(filterednonBIPOCemp, *numnonBIPOCemp);
 
     printf("Average BIPOC Salary: %.2f\n", avgBIPOCemps);
     printf("Average non-BIPOC Salary: %.2f\n", avgnonBIPOCemps);
-
 }
 
-
-   
